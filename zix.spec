@@ -5,12 +5,12 @@
 Summary:	Lightweight C library of portability wrappers and data structures
 Summary(pl.UTF-8):	Lekka biblioteka C z funkcjami zgodności i strukturami danych
 Name:		zix
-Version:	0.4.0
+Version:	0.4.2
 Release:	1
 License:	ISC
 Group:		Libraries
 Source0:	http://download.drobilla.net/%{name}-%{version}.tar.xz
-# Source0-md5:	66622f87223a0a80be63bc92058259c0
+# Source0-md5:	87999e25b0440789d1a8325b00a02ed4
 URL:		http://drobilla.net/pages/software.html
 BuildRequires:	libstdc++-devel >= 6:7
 BuildRequires:	meson >= 0.56.0
