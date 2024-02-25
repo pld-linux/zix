@@ -96,7 +96,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/zix-0
 %{_pkgconfigdir}/zix-0.pc
 
+%if %{with apidocs}
 %files apidocs
 %defattr(644,root,root,755)
 %dir %{_docdir}/zix-0
 %{_docdir}/zix-0/html
+%endif
