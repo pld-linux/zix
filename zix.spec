@@ -5,23 +5,25 @@
 Summary:	Lightweight C library of portability wrappers and data structures
 Summary(pl.UTF-8):	Lekka biblioteka C z funkcjami zgodności i strukturami danych
 Name:		zix
-Version:	0.4.2
+Version:	0.6.2
 Release:	1
 License:	ISC
 Group:		Libraries
 Source0:	http://download.drobilla.net/%{name}-%{version}.tar.xz
-# Source0-md5:	87999e25b0440789d1a8325b00a02ed4
+# Source0-md5:	a21f979f98d9185f5e72ba91df4a776a
 URL:		http://drobilla.net/pages/software.html
 BuildRequires:	libstdc++-devel >= 6:7
 BuildRequires:	meson >= 0.56.0
 BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 1.736
+BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 %if %{with apidocs}
 BuildRequires:	doxygen
+BuildRequires:	python3 >= 1:3.6
+BuildRequires:	python3-sphinx_lv2_theme
 BuildRequires:	sphinx-pdg >= 2
 BuildRequires:	sphinxygen
 %endif
@@ -62,21 +64,17 @@ Dokumentacja API biblioteki zix.
 %setup -q
 
 %build
-%meson build \
+%meson \
 	--default-library=shared \
-	%{!?with_apidocs:-Ddocs=disabled}
+	%{!?with_apidocs:-Ddocs=disabled} \
+	-Dsinglehtml=disabled
 
-%ninja_build -C build
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%ninja_install -C build
-
-%if %{with apidocs}
-# keep just (multi-page) html
-%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/zix-0/singlehtml
-%endif
+%meson_install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
